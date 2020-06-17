@@ -1,0 +1,66 @@
+Question :
+
+Given a binary tree, collect a tree's nodes as if you were doing this: Collect and remove all leaves, repeat until the tree is empty.
+
+ 
+
+Example:
+
+Input: [1,2,3,4,5]
+  
+          1
+         / \
+        2   3
+       / \     
+      4   5    
+
+Output: [[4,5,3],[2],[1]]
+
+Solution :
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    List<List<Integer>> output= new ArrayList<List<Integer>>();
+    public List<List<Integer>> findLeaves(TreeNode root) {
+
+        if(root==null)
+            return output;
+
+        dfs(root);
+        return output;
+        
+    }
+
+    private int dfs(TreeNode root)
+    {
+        if(root==null)
+            return -1;
+
+        int ldepth=dfs(root.left);
+        int rdepth=dfs(root.right);
+
+        int level=  Math.max(ldepth,rdepth)+1;
+        
+        if (output.size() <= level)
+            output.add(new ArrayList<>());
+        output.get(level).add(root.val);
+        return level;
+      
+
+       
+    }
+}
