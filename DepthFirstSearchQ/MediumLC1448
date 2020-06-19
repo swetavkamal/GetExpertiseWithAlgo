@@ -4,11 +4,11 @@ Given a binary tree root, a node X in the tree is named good if in the path from
 
 Return the number of good nodes in the binary tree.
 
-	3
+    3
    / \
   1   4
  /   / \
-3	1  5
+3.  1  5
 
 Input: root = [3,1,4,3,null,1,5]
 Output: 4
