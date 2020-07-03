@@ -1,0 +1,48 @@
+class Solution {
+    public boolean isMajorityElement(int[] nums, int target) {
+        
+        int count=(nums.length/2);
+        int left=0;
+        int right=nums.length-1;
+        int target_count=0;
+
+        while(left < right)
+        {
+        	int mid =left+(right-left)/2;
+        	if(nums[mid] == target)
+        	{
+        		target_count++;
+        		int curr_left= mid-1;
+        		int curr_right=mid+1;
+        		
+              
+        			while(curr_left >= 0 && nums[curr_left] == target)
+        			{
+        				target_count++;
+        				curr_left--;
+        			}			
+
+        			while(curr_right <nums.length && nums[curr_right] ==target)
+        			{
+        				target_count++;
+        				curr_right++;
+        			}
+              	break;
+        		
+        	
+
+        	}
+        	else if(nums[mid]>target)
+        			right=mid;
+        	else 
+        		left=mid+1;
+
+        	
+        }
+
+
+      return target_count> count;
+
+
+    }
+}
