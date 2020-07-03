@@ -1,0 +1,34 @@
+/**
+
+Get the middle element as per Binary search 
+There are three conditions.. if left and right both are less than mid.. that means that is the peak and we need to return that..
+
+Else if left is small than mid.. that means left part is fine and shift left to mid .. take example [0,1,2,3,4,2,1]
+Else if left of mid is bigger .. that means shift right to mid .. Take example [ 0, 5, 4, 3, 2,1, 0]
+
+
+**/
+
+class Solution {
+    public int peakIndexInMountainArray(int[] A) {
+
+    int left = 0;
+    int right = A.length;
+
+    while(left < right)
+    {
+
+    	int mid = left+(right - left)/2;
+    	if(mid >= 1 && (A[mid -1 ]< A[mid]) && (mid <= A.length-1 && A[mid+1]<A[mid]))
+    		return mid;
+    	else
+    		if(mid >=1 && A[mid-1]<A[mid])
+    			left=mid+1;
+    	else
+    		right=mid;
+        
+    }
+        return -1;
+    }
+  
+} 
