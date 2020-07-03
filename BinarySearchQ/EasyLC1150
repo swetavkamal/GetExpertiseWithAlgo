@@ -1,3 +1,13 @@
+/**
+
+Use Binary search to find the element in array which is equal to the target
+once you find that element start two pointer.. one towards its left and second right to the middle element and keep on going until either we get out of index or element is not equal the target
+
+Keep increasing the counter on every left or right matches with target
+Note : as soon as you find the element increase counter by 1 before going left or right as you would make curr_left=mid-1 && curr_right =mid+1
+
+**/
+
 class Solution {
     public boolean isMajorityElement(int[] nums, int target) {
         
