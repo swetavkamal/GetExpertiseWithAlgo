@@ -1,0 +1,34 @@
+class Solution {
+    public int divide(int dividend, int divisor) {
+        
+	if (dividend == -2147483648 && divisor == -1) {
+    	return 2147483647;
+	}
+
+        int minusCount=0;
+        if(dividend <0)
+        {
+        	dividend=-dividend;
+        	minusCount++;
+        }
+        if(divisor <0)
+        {
+        	divisor=-divisor;
+        	minusCount++;
+        }
+
+        int currentSum=dividend;
+        int quotient=0;
+        while(currentSum-divisor>=0)
+        {
+          quotient++;
+        	currentSum=currentSum-divisor;
+        	
+        }
+
+        if(minusCount %2 ==0 )
+        	return quotient;
+        else
+        	return -quotient;
+    }
+}   

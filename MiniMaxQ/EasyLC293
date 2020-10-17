@@ -1,0 +1,40 @@
+/**
+
+Start the traversal of string and go from 0 to end-1 
+keep on checking charAt(i) && charAt(i+1) .. if they both are ++
+then attach part of string before i as s.substring(0,i) and add -- and final add
+part of string after(i+2)
+Add this to output list..
+
+**/
+
+
+class Solution {
+    public List<String> generatePossibleNextMoves(String s) {
+ 
+ 	int x=0;
+
+ 	List<String> output = new ArrayList<>();
+ 	
+ 	while(x < s.length()-1)
+ 	{
+    String curr="";
+    
+   if(s.charAt(x) == '+' && s.charAt(x+1) == '+')
+    {
+      curr+=s.substring(0,x);
+ 		  curr+="--";
+ 		  curr+=s.substring(x+2);
+ 	    output.add(curr);
+    }
+    
+    x=x+1;
+    
+   }
+
+ 	return output;
+
+
+
+    }
+}

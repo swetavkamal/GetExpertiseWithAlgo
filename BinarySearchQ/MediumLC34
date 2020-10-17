@@ -1,0 +1,61 @@
+/**
+First of all use Binary search to find the target element in the array
+Once element is found ..
+get that index and put it in leftIndex and rightIndex
+
+Start one while loop which would go on to teh left till elements are found
+One while loop will go on right side till element is found
+
+Finally store leftIndex and rightIndex on output array and return 
+
+**/
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        
+        int left =0;
+        int right=nums.length-1;
+        int[] output = new int[2];
+        int foundIndex=-1;
+        while(left <= right)
+        {
+        	int mid = left+(right-left)/2;
+        	if(nums[mid]==target)
+        	{
+        		foundIndex=mid;
+        		break;
+        	}
+        	else if (nums[mid]>target)
+        				right=mid-1;
+        	else
+        		left=mid+1;
+
+        }
+        if(foundIndex==-1)
+        {
+         output[0]=-1;
+         output[1]=-1;
+         return output;
+        	
+        }
+        else
+        {
+        	int leftIndex=foundIndex;
+          int rightIndex=foundIndex;
+        	while(leftIndex >= 0 && nums[leftIndex]==target)
+        	{
+        		leftIndex--;
+        	}
+        	while(rightIndex <= nums.length-1 && nums[rightIndex]==target)
+        	{
+        		rightIndex++;
+        	}
+           output[0]=leftIndex+1;
+            output[1]=rightIndex-1;
+        }
+       
+    	
+    	return output;
+    }
+
+}

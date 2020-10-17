@@ -1,0 +1,38 @@
+/**
+
+We need to take one string at a time 
+create two array .. one even and one odd
+and then check each character.. if the character is on even index position..
+Get to the index of the array on even or odd and +1 to it..
+Finally add it to set..
+
+return size of set
+**/
+
+class Solution {
+    public int numSpecialEquivGroups(String[] A) {
+        Set<String> set = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+
+        for (String s : A) {
+          
+            int[] odd = new int[26];
+            int[] even = new int[26];
+            for (int i = 0; i < s.length(); i++) {
+              
+                if (i % 2 == 0) 
+                  even[s.charAt(i) - 'a']++;
+                else 
+                  odd[s.charAt(i) - 'a']++;
+            }
+          String str="";
+          str+=Arrays.toString(even);
+          str+=Arrays.toString(odd);
+        
+            set.add(str);
+           
+        }
+        
+        return set.size();
+    }
+}

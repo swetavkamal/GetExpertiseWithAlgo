@@ -1,0 +1,44 @@
+class Solution {
+    public boolean circularArrayLoop(int[] nums) {
+      
+      int n=nums.length;
+     
+      for(int i=0;i<n;i++){
+        int s=i;
+        int f=i;
+        while( nums[s]*nums[next(nums,s)]>0 
+              && nums[f]*nums[next(nums,f)]>0
+              && nums[f]*nums[next(nums,next(nums,f))]>0)
+        {
+            s=next(nums,s);
+            f=next(nums,next(nums,f));
+            if(s==f){
+                if(s==next(nums,s))
+                    break;
+                return true;
+            }
+        }
+        s=i;
+        int val=nums[s];
+        while(val*nums[s]>0){
+            int x=s;
+            s=next(nums,s);
+            nums[x]=0;
+        }
+    }
+        
+      return false;
+    }
+  
+  
+  private  int next(int[] a,int i){
+      int n = a.length;
+      int x=i+a[i]+n;
+        //in the case -ve value is too large!
+      while(x<0)
+        x+=n;
+      return (x+n) % n;
+      }
+  
+ 
+}

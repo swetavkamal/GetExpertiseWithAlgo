@@ -1,0 +1,44 @@
+/**
+
+We will be using recurion here and will pass "1" to it
+In recursion.. we will start a while loop with a pointer and count..
+we will loop throug the loop and until we find repeated character, we will increase counter by 1 
+Once the repeated characters are exhaused we will add the character at pointer and counter to a stringbuilder and pass it on again to the recursive function
+
+this recursive function will go on until your global counter reaches n
+
+**/
+
+class Solution {
+
+	int count=1;
+    public String countAndSay(int n) {
+
+    return recursive("1",n);
+        
+    }
+
+    private String recursive(String num, int n)
+    {
+    	if(n==count)
+    		return num;
+
+    	int p1=0;
+    	StringBuilder curr= new StringBuilder();
+    	while(p1<num.length())
+    	{
+    		int numCount=1;
+    		while(p1<num.length()-1 && num.charAt(p1)==num.charAt(p1+1))
+    		{
+    			p1++;
+    			numCount++;
+    		}
+    		curr.append(numCount);
+    		curr.append(num.charAt(p1));
+    		p1++;
+    	}
+    	count++;
+    	return recursive(curr.toString(),n);
+
+    }
+}

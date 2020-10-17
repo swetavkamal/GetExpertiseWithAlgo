@@ -1,0 +1,57 @@
+Given an integer matrix, find the length of the longest increasing path.
+
+From each cell, you can either move to four directions: left, right, up or down. You may NOT move diagonally or move outside of the boundary (i.e. wrap-around is not allowed).
+
+Input: nums = 
+[
+  [9,9,4],
+  [6,6,8],
+  [2,1,1]
+] 
+Output: 4 
+Explanation: The longest increasing path is [1, 2, 6, 9].
+
+
+
+class Solution {
+
+	private int rows;
+	private int cols;
+	private int longestPath=0;
+	int[][] neighbours={{0,1},{0,-1},{1,0},{-1,0}};
+    public int longestIncreasingPath(int[][] matrix) {
+ 
+     rows=matrix.length;
+     cols=matrix[0].length;
+
+     for(int i=0;i<rows;i++)
+     {
+     	for(int j=0;j<cols;j++)
+     	{
+     		dfs(matrix, i, j);
+     	}
+     }
+
+	}
+
+
+	private int dfs(int[][] matrix, int i, int j)
+	{
+
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

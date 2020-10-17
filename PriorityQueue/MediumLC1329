@@ -1,0 +1,74 @@
+/**
+Input: mat = [[3,3,1,1],[2,2,1,2],[1,1,1,2]]
+Output: [[1,1,1,1],[1,2,2,2],[1,2,3,3]]
+		
+			[0][1] [2][3]
+I/P  ==> [0] 3	3	1	1
+		 [1] 2	2	1	2
+		 [2] 1	1	1	2
+
+matrix should be diagonally sorted
+O/P ==>  1	1	1	1
+		 1	2	2	2
+		 1	2	3	3
+
+Solution :
+For every diagonal element (i -j) while looping would be same 
+So we will create a map where key would be difference and value would be priorityqueue with the values 
+
+diff
+0		--> <1,2,3>
+-1		--> <1,2,3>
+-2		--> <1,2>
+-3		--> <1>
+1		--> <1,2>
+2		--> <1>
+
+Since it is priorityqueue so once the value gets added, it is sorted 
+
+Now once we have the priority queue, we will start the loop of i and j 
+everytime we will calculate the diff, search its value in the hashmap, poll first element from priorityQueue and add it to mat[i][j]
+
+**/
+
+
+class Solution {
+   
+  Map<Integer,PriorityQueue<Integer>> hm = new HashMap<>();
+  public int[][] diagonalSort(int[][] mat) {
+      
+    if(mat.length ==0 )
+      return mat;
+    
+      int row=mat.length;
+      int col=mat[0].length;
+    
+    for(int i=0;i<row;i++)
+    {
+      for(int j=0; j<col;j++)
+      {
+         int diff = i-j;
+          if(!hm.containsKey(diff))
+          {
+            PriorityQueue<Integer> pq = new PriorityQueue<>();
+            pq.add(mat[i][j]);
+            hm.put(diff, pq);
+          }
+        else
+          hm.get(diff).add(mat[i][j]);
+      }
+    }
+    
+    for(int i=0;i<row;i++)
+    {
+      for(int j=0;j<col;j++)
+      {
+        int diff= i-j;
+        mat[i][j]=hm.get(diff).poll();
+      }
+    }
+      
+  return mat;
+        
+    }
+}
