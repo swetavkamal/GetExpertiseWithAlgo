@@ -1,0 +1,53 @@
+/**
+URLS would be come from getUrls 
+return the list of URLS which matches with the startUrl given
+
+Fist of all, we have the start URL so we need to get the hostname out of it..
+Since it will start with http:// --> 7 
+So we would find the next '/' such as http://news.yahoo.com/news so when we run startUrl.indexOf('/',7) .. we would get 22
+And substring of startUrl(0,22) --> Would give "http://news.yahoo.com" .. Our hostname
+but if we get -1 from indexOf that means the entire startUrl is hostname
+
+Now once we have the hostname, We need to do BFS on all the URLs.
+We add the starturl to the Queue.
+poll the queue, and getAll urls from the give url using getUrls method.. 
+if it starts with hostname add it to queue
+
+**/
+
+//Mono threaded solution
+class Solution {
+    Set<String> output= new HashSet<>();
+    Queue<String> queue= new LinkedList<>();
+    public List<String> crawl(String startUrl, HtmlParser htmlParser) {
+        
+        int idx=startUrl.indexOf('/',7);
+        String hostname;
+        if(idx == -1)
+        	hostname=startUrl;
+        else
+        	hostname=startUrl.substring(0,idx);
+
+       System.out.println("hostname is : "+hostname);
+       queue.add(startUrl);
+
+       while(!queue.isEmpty())
+       {
+       	String str= queue.poll();
+       	if(str.startsWith(hostname))
+       		output.add(str);
+       	for(String s : htmlParser.getUrls(str))
+       		queue.add(s);
+		}
+
+       return new ArrayList<>(output);	
+
+
+
+    }
+}
+
+
+/** The above solution uses single thread so would timeout. We need to have a multi threaded solution
+
+**/

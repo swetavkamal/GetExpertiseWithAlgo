@@ -1,0 +1,63 @@
+
+/* A string has comments in the form of "// or /* */ "
+remove comments from the string 
+
+
+We have few conditions to check 
+[1] take one string from the array if it has // simply break the entire line as this is comment
+[2] when we have /* that means everything till we have */ would be commented
+[3] So intialize the variable mode with false
+[4] As soon as we see /* mark mode as true
+[5] Now we can not add the string to stringBuilder until mode is false
+[6] When we have */ mark mode as false
+
+So to add string to stringbuilder if mode is false add it else skip..
+
+*/
+
+
+
+class Solution {
+    public List<String> removeComments(String[] source) {
+    
+    List<String> output = new ArrayList<>();
+    StringBuilder sb = new StringBuilder();
+  	boolean mode=false;
+  	for(String str : source)
+  	{
+  		for(int i=0;i<str.length();i++)
+  		{
+  			if(mode==true)
+  			{
+  				if(str.charAt(i)=='*' && i<str.length()-1 && str.charAt(i+1)=='/')
+  				{
+  					mode=false;
+  					i++;
+  				}
+  			}
+  			else if(str.charAt(i)=='/' && i<str.length()-1 && str.charAt(i+1)=='/')
+  				break;
+  			else if(str.charAt(i)=='/' && i<str.length()-1 && str.charAt(i+1)=='*')
+  			{
+  				mode=true;
+  				i++;
+  			}
+  			else
+  			{
+  				sb.append(str.charAt(i));
+  			}
+
+  		}
+
+  		if(mode==false && sb.length() >0 )
+  		{
+  			output.add(sb.toString());
+  			sb= new StringBuilder();
+  		}
+
+  	}  
+  	return output;  
+      
+        
+    }
+}

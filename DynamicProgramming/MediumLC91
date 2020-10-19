@@ -1,0 +1,64 @@
+/**
+Question :
+A message containing letters from A-Z is being encoded to numbers using the following mapping:
+
+'A' -> 1
+'B' -> 2
+...
+'Z' -> 26
+Given a non-empty string containing only digits, determine the total number of ways to decode it.
+
+The answer is guaranteed to fit in a 32-bit integer.
+
+Input: s = "226"
+Output: 3
+Because [ "2,2,6", "2,26", "22,6"]
+
+We will do it using Dynamic programming..
+We will take a dp of the length , 1 greater than string length;
+dp[0]=1
+dp[1]=1 if(s.charAt(0) != 0) as 0 does not have a coding. It starts from 1 and goes till 26
+
+Now for everyelement if it is not 0, dp[i]=dp[i-1]
+And then if the last two elements make good pair that <=26, than add the comobination from i-2 to it
+dp[i]=dp[i]+dp[i-2]
+
+return dp[s.length]
+
+**/
+
+
+class Solution {
+    public int numDecodings(String s) {
+
+    if(s.length()==0 || s== null)
+    	return 0;
+    int dp[] = new int[s.length()+1];
+    dp[0]=1;
+    if(s.charAt(0) != '0')
+    	dp[1]=1;
+
+
+
+   	for(int i=2;i<dp.length;i++)
+   	{
+   		if(s.charAt(i-1) != '0')
+   			  dp[i]=dp[i-1];
+
+   		int twoDigit=Integer.parseInt(s.substring(i-2,i));
+   		if(twoDigit >= 10 && twoDigit <=26)
+   			dp[i]=dp[i]+dp[i-2];
+        
+    }
+
+    return dp[s.length()];
+   	}
+}
+
+
+
+
+
+
+
+
